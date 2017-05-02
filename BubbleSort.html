@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>冒泡排序</title>
+    <!--1.依次比较相邻的两个数，如果不符合排序规则，则调换两个数的位置。这样一遍比较下来，能够保证最大（或最小）的数排在最后一位。-->
+    <!--2.再对最后一位以外的数组，重复前面的过程，直至全部排序完成。-->
+</head>
+<body>
+
+    <script>
+        //先定义一个交换函数，作用是交换两个位置的值
+        function swap(myArray, p1, p2){
+            var temp = myArray[p1];
+            myArray[p1] = myArray[p2];
+            myArray[p2] = temp;
+        }
+        //定义主函数
+        function bubbleSort(myArray){
+            var len = myArray.length;
+            var j;
+            var stop;
+            for(var i = 0; i < len; i++){
+                for(j = 0, stop = len - 1 -i; j < stop; j++){
+                    if(myArray[j] > myArray[j + 1]){
+                        swap(myArray, j, j + 1);
+                    }
+                }
+            }
+            return myArray;
+        }
+        console.log(bubbleSort([2,4,32,5,7,1,43]).valueOf());//[1, 2, 4, 5, 7, 32, 43]
+    </script>
+</body>
+</html>

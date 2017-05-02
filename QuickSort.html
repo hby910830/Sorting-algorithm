@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>快速排序</title>
+    <!--快速排序（quick sort）是公认最快的排序算法之一。-->
+    <!--先确定一个“支点”（pivot），将所有小于“支点”的值都放在该点的左侧，-->
+    <!--大于“支点”的值都放在该点的右侧，然后对左右两侧不断重复这个过程，直到所有排序完成。-->
+</head>
+<body>
+    <script>
+      /*
+       * 1.确定“支点”（pivot）。虽然数组中任意一个值都能作为“支点”，但通常是取数组的中间值。
+       * 2.建立两端的指针。左侧的指针指向数组的第一个元素，右侧的指针指向数组的最后一个元素。
+       * 3.左侧指针的当前值与“支点”进行比较，如果小于“支点”则指针向后移动一位，否则指针停在原地。
+       * 4.右侧指针的当前值与“支点”进行比较，如果大于“支点”则指针向前移动一位，否则指针停在原地。
+       * 5.左侧指针的位置与右侧指针的位置进行比较，如果前者大于等于后者，则本次排序结束；否则，左侧指针的值与右侧指针的值相交换。
+       * 6.对左右两侧重复第2至5步。
+       */
+
+        //首先部署一个swap函数，用于互换两个位置的值。
+        function swap(myArray, firstIndex, secondIndex){
+            var temp = myArray[firstIndex];
+                myArray[firstIndex] = myArray[secondIndex];
+                myArray[secondIndex] = temp;
+        }
+        //部署一个partition函数，用于完成一轮排序。
+        function partition(myArray, left, right){
+            var pivot = myArray[Math.floor((right + left) / 2)],
+                    i = left,
+                    j = right;
+            while(i <= j){
+                while(myArray[i] < pivot){
+                   i++;
+                }
+                while (myArray[j] > pivot) {
+                    j--;
+                }
+                if(i <= j){
+                    swap(myArray, i , j);
+                    i++;
+                    j--;
+                }
+            }
+            return i;
+        }
+        //接下来，就是递归上面的过程，完成整个排序。
+        function quickSort(myArray, left, right) {
+            if (myArray.length < 2) return myArray;
+            left = (typeof left !== "number" ? 0 : left);
+            right = (typeof right !== "number" ? myArray.length - 1 : right);
+            var index  = partition(myArray, left, right);
+            if (left < index - 1) {
+                quickSort(myArray, left, index - 1);
+            }
+            if (index < right) {
+                quickSort(myArray, index, right);
+            }
+            return myArray;
+        }
+        console.log(quickSort([3, 2, 4, 5, 1]).valueOf())
+    </script>
+</body>
+</html>

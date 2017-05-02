@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>选择排序</title>
+    <!--选择排序（Selection Sort）与冒泡排序类似，也是依次对相邻的数进行两两比较。-->
+    <!--不同之处在于，它不是每比较一次就调换位置，而是一轮比较完毕，找到最大值（或最小值）之后，将其放在正确的位置，其他数的位置不变。-->
+</head>
+<body>
+    <script>
+        //先定义一个交换函数，作用是交换两个位置的值
+        function swap(myArray, p1, p2){
+            var temp = myArray[p1];
+            myArray[p1] = myArray[p2];
+            myArray[p2] = temp;
+        }
+        //定义主函数
+        function selectionSort(myArray){
+            var len = myArray.length,
+                 min;
+            for(var i = 0; i < len; i++){
+                //将当前位置设为最小值
+                min = i;
+                //检查数组其余部分是否更小
+                for(var j = i + 1; j < len; j++){
+                    if(myArray[j] < myArray[min]){
+                        min = j;
+                    }
+                }
+                //如果当前位置不是最小值，将其换位最小值
+                if(i != min){
+                    swap(myArray, i, min);
+                }
+            }
+            return myArray;
+        }
+
+        console.log(selectionSort([1,4,3,2,55,33,5]).valueOf())
+    </script>
+</body>
+</html>
